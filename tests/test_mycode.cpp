@@ -1,27 +1,44 @@
 #include <QtTest/QtTest>
-#include "../src/mycode.h"
+#include "../src/form.h"
 
-#include <sstream>
-using namespace std;
-
-class TestMyCode: public QObject {
+class TestMyCode : public QObject {
     Q_OBJECT
+
 private slots:
-    void testIvan();
+    void testSubstringPresent();
+    void testSubstringNotPresent();
 };
 
-void TestMyCode::testIvan() {
-    std::stringstream sstr;
-    stringstream isst;
-    isst << "Ivan";
+void TestMyCode::testSubstringPresent() {
+    Form form;
+    QString str = "Substring";
+    QString sub_str = "string";
 
-    hello(isst, sstr);
+    form.ui->str->setText(str);
+    form.ui->sub_str->setText(sub_str);
 
-    string str;
-    getline(sstr, str);
+    form.start();
 
-    QCOMPARE(str == "hello Ivan", true);
+    qDebug() << form.ui->result->text();
+
+    QCOMPARE(form.ui->result->text(), QString("yes"));
 }
+
+void TestMyCode::testSubstringNotPresent() {
+    Form form;
+    QString str = "Substring";
+    QString sub_str = "None";
+
+    form.ui->str->setText(str);
+    form.ui->sub_str->setText(sub_str);
+
+    form.start();
+
+    qDebug() << form.ui->result->text();
+
+    QCOMPARE(form.ui->result->text(), QString("no"));
+}
+
 
 QTEST_MAIN(TestMyCode)
 #include "test_mycode.moc"
