@@ -1,23 +1,26 @@
 #include "mycode.h"
+#include "QVector"
+#include "QString"
 
-void hello(std::istream &ist, std::ostream& ost) {
-    std::string name;
+bool match_from_mycode(string &s, int pos, string &sub) {
+    if (s.size()-pos < sub.size())
+        return false;
 
-    // Чтение имени из входного потока
-    ist >> name;
+    for (int i = 0; i < sub.size(); i++) {
+        if (s[pos+i] != sub[i])
+            return false;
+    }
+    return true;
+}
 
-    // Проверка на пустую строку
-    if (name.empty()) {
-        ost << "Извините, имя не было введено.";
-    } else {
-        ost << "Привет, ";
 
-        // Если имя - это "Вася", то выводим особое приветствие
-        if (name == "Вася") {
-            ost << "Вася!";
-        } else {
-            // Иначе просто приветствуем по имени
-            ost << name << "!";
+QVector<int> my_substr_mycode(string &s, string &sub) {
+    QVector<int> inds;
+
+    for (int i = 0; i < s.size(); i++) {
+        if (match_from_mycode(s, i, sub)) {
+            inds.push_back(i);
         }
     }
+    return inds;
 }
