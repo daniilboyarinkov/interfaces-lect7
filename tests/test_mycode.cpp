@@ -28,8 +28,5 @@ void TestMyCode::testSingleMatch()
     QCOMPARE(result[0], 2);
 }
 
-
-};
-
 QTEST_MAIN(TestMyCode)
 #include "test_mycode.moc"
