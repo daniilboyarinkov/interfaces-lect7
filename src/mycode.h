@@ -4,6 +4,6 @@
 #include <iostream>
 using namespace std;
 
-void hello(istream& ist, ostream& ost);
+QVector<int> boyerMooreSearch(string &text, string &pattern);
 
 #endif // MYCODE_H
