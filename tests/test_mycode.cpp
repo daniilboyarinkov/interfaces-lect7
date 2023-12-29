@@ -6,26 +6,28 @@ using namespace std;
 
 class TestMyCode: public QObject {
     Q_OBJECT
+
 private slots:
-    void testHelloWithName() {
-        stringstream input;
-        stringstream output;
-        input << "Ivan";
+void testEmptySubstring();
+void testSingleMatch();
+};
 
-        hello(input, output);
+void TestMyCode::testEmptySubstring()
+{
+    string str = "string";
+    string sub = "";
+    QVector<int> result = boyerMooreSearch(str, sub);
+    QCOMPARE(result[0], 0);
+}
 
-        QCOMPARE(output.str(), string("hello, Ivan"));
-    }
+void TestMyCode::testSingleMatch()
+{
+    string str = "string";
+    string sub = "ri";
+    QVector<int> result = boyerMooreSearch(str, sub);
+    QCOMPARE(result[0], 2);
+}
 
-    void testHelloWithEmptyName() {
-        stringstream input;
-        stringstream output;
-        input << "";
-
-        hello(input, output);
-
-        QCOMPARE(output.str(), string("name not entered"));
-    }
 
 };
 
